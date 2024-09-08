@@ -1,0 +1,50 @@
+# Ignore build files
+*.log
+*.jou
+*.str
+*.out
+*.rpt
+*.sav
+*.tmp
+*.wdb
+*.xrf
+*.xsc
+*.bak
+*.bin
+*.dat
+*.pb
+*.cache
+*.hw
+*.prj
+
+# Vivado-specific
+*.runs/
+*.sim/
+*.ip_user_files/
+*.Xil/
+
+# Quartus-specific
+db/
+incremental_db/
+output_files/
+*.rpt
+*.sof
+*.qws
+
+# Simulation files
+*.vcd
+*.wlf
+*.wdb
+
+# Ignore generated synthesis netlist files
+*.edf
+*.ngc
+*.ncf
+
+# Ignore backup files
+*~
+*.bak
+
+# OS-specific files
+.DS_Store
+Thumbs.db
