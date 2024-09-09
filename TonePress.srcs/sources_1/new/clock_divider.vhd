@@ -33,8 +33,10 @@ entity clock_divider is
 end clock_divider;
 
 architecture Behavioral of clock_divider is
+
     signal clk_counter : unsigned(31 downto 0) := (others => '0');  -- Clock counter
     signal pwm_out     : std_logic := '0';  -- Divided clock signal (square wave)
+    
 begin
     -- Clock divider process
     process (clk, reset)
