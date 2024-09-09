@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 09/09/2024 12:19:16 AM
+-- Create Date: 09/09/2024 11:18:58 AM
 -- Design Name: 
--- Module Name: sound_generator_top_TB - Behavioral
+-- Module Name: tb_sound_generator_top - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -68,7 +68,7 @@ begin
             speaker   => speaker
         );
 
-    -- Clock process
+    -- Clock generation process
     clk_process: process
     begin
         clk <= '0';
@@ -77,40 +77,81 @@ begin
         wait for clk_period / 2;
     end process;
 
-    -- Stimulus process
+    -- Stimulus process covering all scenarios
     stim_proc: process
     begin
-        -- Apply reset
+        -- **Scenario 1: Initial Reset**
+        -- Assert reset to initialize the system
         reset <= '1';
         wait for 20 ns;
         reset <= '0';
-
-        -- Test different button presses
-        -- Press Button Left (btnL)
+        wait for 100 ns;
+        
+        -- **Scenario 2: Press Button Left (btnL)**
+        -- Expectation: Generate A4 (440 Hz)
         btnL <= '1'; btnR <= '0'; btnU <= '0'; btnD <= '0';
         wait for 100 ms;
         btnL <= '0';
-
-        -- Press Button Right (btnR)
+        wait for 20 ns;
+        
+        -- **Scenario 3: Press Button Right (btnR)**
+        -- Expectation: Generate B4 (493.88 Hz)
         btnL <= '0'; btnR <= '1'; btnU <= '0'; btnD <= '0';
         wait for 100 ms;
         btnR <= '0';
-
-        -- Press Button Up (btnU)
+        wait for 20 ns;
+        
+        -- **Scenario 4: Press Button Up (btnU)**
+        -- Expectation: Generate C5 (523.25 Hz)
         btnL <= '0'; btnR <= '0'; btnU <= '1'; btnD <= '0';
         wait for 100 ms;
         btnU <= '0';
-
-        -- Press Button Down (btnD)
+        wait for 20 ns;
+        
+        -- **Scenario 5: Press Button Down (btnD)**
+        -- Expectation: Generate D5 (587.33 Hz)
         btnL <= '0'; btnR <= '0'; btnU <= '0'; btnD <= '1';
         wait for 100 ms;
         btnD <= '0';
-
-        -- Test with no button pressed
+        wait for 20 ns;
+        
+        -- **Scenario 6: Press Multiple Buttons Simultaneously**
+        -- Example: Press btnL and btnU together
+        -- Depending on your design, this might prioritize one button or handle multiple tones
+        btnL <= '1'; btnR <= '0'; btnU <= '1'; btnD <= '0';
+        wait for 100 ms;
+        btnL <= '0'; btnU <= '0';
+        wait for 20 ns;
+        
+        -- **Scenario 7: Rapid Button Presses (Debouncing Check)**
+        -- Simulate bouncing by rapidly toggling a button
+        -- Only the stable press after debouncing should be recognized
+        btnR <= '1';
+        wait for 5 ns;
+        btnR <= '0';
+        wait for 5 ns;
+        btnR <= '1';
+        wait for 5 ns;
+        btnR <= '0';
+        wait for 15 ms;  -- Wait longer than debounce time
+        btnR <= '1';
+        wait for 100 ms;
+        btnR <= '0';
+        wait for 20 ns;
+        
+        -- **Scenario 8: No Button Pressed**
+        -- Expectation: Default behavior (e.g., A4 tone or silence)
         btnL <= '0'; btnR <= '0'; btnU <= '0'; btnD <= '0';
         wait for 100 ms;
-
-        -- End simulation
+        
+        -- **Scenario 9: Extended Operation**
+        -- Keep buttons pressed for extended periods to observe stability
+        btnU <= '1';
+        wait for 500 ms;
+        btnU <= '0';
+        wait for 20 ns;
+        
+        -- **End of Simulation**
         wait;
     end process;
 
