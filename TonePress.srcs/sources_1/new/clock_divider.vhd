@@ -27,22 +27,18 @@ entity clock_divider is
     Port (
         clk      : in std_logic;  -- 100 MHz clock input
         reset    : in std_logic;  -- Reset signal
-        tone_freq : in unsigned(31 downto 0); -- Frequency control input 
+        tone_freq : in unsigned(31 downto 0); -- Frequency control input (e.g., 227272 for 440 Hz)
         clk_out  : out std_logic  -- Output clock for the PWM (divided clock)
     );
 end clock_divider;
 
 architecture Behavioral of clock_divider is
-
     signal clk_counter : unsigned(31 downto 0) := (others => '0');  -- Clock counter
     signal pwm_out     : std_logic := '0';  -- Divided clock signal (square wave)
-
 begin
-
     -- Clock divider process
     process (clk, reset)
     begin
-
         if reset = '1' then
             clk_counter <= (others => '0');  -- Reset the counter
             pwm_out <= '0';  -- Reset the PWM output
@@ -54,10 +50,10 @@ begin
                 clk_counter <= clk_counter + 1;  -- Increment the counter
             end if;
         end if;
-        
     end process;
     
     -- Output the divided clock signal
     clk_out <= pwm_out;
     
 end Behavioral;
+
