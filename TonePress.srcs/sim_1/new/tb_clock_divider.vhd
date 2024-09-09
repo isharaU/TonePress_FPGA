@@ -68,15 +68,15 @@ begin
 
         -- Scenario 2: Set a tone frequency and observe the divided clock
         tone_freq_tb <= to_unsigned(50, 32);  -- Example frequency division value
-        wait for 50 ns;
+        wait for 200 ns;
 
         -- Scenario 3: Change the frequency
         tone_freq_tb <= to_unsigned(100, 32);
-        wait for 50 ns;
+        wait for 200 ns;
 
         -- Scenario 4: Change the frequency again
         tone_freq_tb <= to_unsigned(200, 32);
-        wait for 50 ns;
+        wait for 200 ns;
 
         -- Scenario 5: Apply reset again
         reset_tb <= '1';
@@ -88,4 +88,13 @@ begin
         wait;
     end process;
 
+    -- Monitor process to observe clk_out_tb
+    monitor_proc: process
+    begin
+        -- Continuously monitor the clock output and print when it changes
+        wait on clk_out_tb;
+        report "clk_out_tb changed to: " & std_logic'image(clk_out_tb);
+    end process;
+
 end Behavioral;
+
