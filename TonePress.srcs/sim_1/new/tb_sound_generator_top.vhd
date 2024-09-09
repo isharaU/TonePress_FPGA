@@ -90,28 +90,28 @@ begin
         -- **Scenario 2: Press Button Left (btnL)**
         -- Expectation: Generate A4 (440 Hz)
         btnL <= '1'; btnR <= '0'; btnU <= '0'; btnD <= '0';
-        wait for 100 ms;
+        wait for 100 ns;
         btnL <= '0';
         wait for 20 ns;
         
         -- **Scenario 3: Press Button Right (btnR)**
         -- Expectation: Generate B4 (493.88 Hz)
         btnL <= '0'; btnR <= '1'; btnU <= '0'; btnD <= '0';
-        wait for 100 ms;
+        wait for 100 ns;
         btnR <= '0';
         wait for 20 ns;
         
         -- **Scenario 4: Press Button Up (btnU)**
         -- Expectation: Generate C5 (523.25 Hz)
         btnL <= '0'; btnR <= '0'; btnU <= '1'; btnD <= '0';
-        wait for 100 ms;
+        wait for 100 ns;
         btnU <= '0';
         wait for 20 ns;
         
         -- **Scenario 5: Press Button Down (btnD)**
         -- Expectation: Generate D5 (587.33 Hz)
         btnL <= '0'; btnR <= '0'; btnU <= '0'; btnD <= '1';
-        wait for 100 ms;
+        wait for 100 ns;
         btnD <= '0';
         wait for 20 ns;
         
@@ -119,7 +119,7 @@ begin
         -- Example: Press btnL and btnU together
         -- Depending on your design, this might prioritize one button or handle multiple tones
         btnL <= '1'; btnR <= '0'; btnU <= '1'; btnD <= '0';
-        wait for 100 ms;
+        wait for 100 ns;
         btnL <= '0'; btnU <= '0';
         wait for 20 ns;
         
@@ -133,21 +133,21 @@ begin
         btnR <= '1';
         wait for 5 ns;
         btnR <= '0';
-        wait for 15 ms;  -- Wait longer than debounce time
+        wait for 15 ns;  
         btnR <= '1';
-        wait for 100 ms;
+        wait for 100 ns;
         btnR <= '0';
         wait for 20 ns;
         
         -- **Scenario 8: No Button Pressed**
         -- Expectation: Default behavior (e.g., A4 tone or silence)
         btnL <= '0'; btnR <= '0'; btnU <= '0'; btnD <= '0';
-        wait for 100 ms;
+        wait for 100 ns;
         
         -- **Scenario 9: Extended Operation**
         -- Keep buttons pressed for extended periods to observe stability
         btnU <= '1';
-        wait for 500 ms;
+        wait for 500 ns;
         btnU <= '0';
         wait for 20 ns;
         
