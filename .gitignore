@@ -48,3 +48,6 @@ output_files/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore Vivado project files
+*.debug
