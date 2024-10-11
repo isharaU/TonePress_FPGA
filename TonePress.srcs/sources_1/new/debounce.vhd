@@ -67,4 +67,3 @@ begin
     debounced_button <= button_stable;
     
 end Behavioral;
-
