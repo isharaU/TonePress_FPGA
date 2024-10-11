@@ -27,7 +27,7 @@ entity clock_divider is
     Port (
         clk      : in std_logic;  -- 100 MHz clock input
         reset    : in std_logic;  -- Reset signal
-        tone_freq : in unsigned(31 downto 0); -- Frequency control input (e.g., 227272 for 440 Hz)
+        tone_freq : in unsigned(31 downto 0); -- Frequency control input 
         clk_out  : out std_logic  -- Output clock for the PWM (divided clock)
     );
 end clock_divider;
@@ -42,7 +42,7 @@ begin
     process (clk, reset)
     begin
         if reset = '1' then
-            clk_counter <= (others => '0');  -- Reset the counter
+            clk_counter <= (others => '0');  -- Reset all the bits of clk_counter ro zero
             pwm_out <= '0';  -- Reset the PWM output
         elsif rising_edge(clk) then
             if clk_counter = tone_freq then
