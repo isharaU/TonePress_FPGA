@@ -28,12 +28,12 @@ entity debounce is
         clk     : in std_logic;         -- 100 MHz clock input
         reset   : in std_logic;         -- Reset signal
         button  : in std_logic;         -- Raw button input (bouncing)
+        debounce_time : in unsigned(19 downto 0);  -- Configurable debounce time
         debounced_button : out std_logic -- Debounced button output
     );
 end debounce;
 
 architecture Behavioral of debounce is
-    constant DEBOUNCE_TIME : unsigned(19 downto 0) := to_unsigned(1000000, 20);  -- 10 ms debounce time (assuming 100 MHz clock)
     signal counter         : unsigned(19 downto 0) := (others => '0');  -- Counter for debounce time
     signal button_stable   : std_logic := '0';  -- Button stable state
     signal button_last     : std_logic := '0';  -- Last state of the button
@@ -49,10 +49,10 @@ begin
             -- Check if button state changed
             if button = button_last then
                 -- Button state hasn't changed, count up to debounce time
-                if counter < DEBOUNCE_TIME then
+                if counter < debounce_time then
                     counter <= counter + 1;
                 else
-                    button_stable <= button_last;  -- Set stable state if button holds the same state for DEBOUNCE_TIME
+                    button_stable <= button_last;  -- Set stable state if button holds the same state for debounce_time
                 end if;
             else
                 -- Button state changed, reset the counter
@@ -67,4 +67,5 @@ begin
     debounced_button <= button_stable;
     
 end Behavioral;
+
 
