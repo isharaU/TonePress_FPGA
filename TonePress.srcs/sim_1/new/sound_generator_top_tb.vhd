@@ -93,7 +93,7 @@ begin
         btnL <= '1';
         wait for 11 ms;
         btnL <= '0';
-        wait for 5ms;  -- Wait to see PWM output effect
+        wait for 5 ms;  -- Wait to see PWM output effect
 
         -- Apply reset
         reset <= '1';
@@ -105,7 +105,7 @@ begin
         btnR <= '1';
         wait for 11 ms;
         btnR <= '0';
-        wait for 5ms;  -- Wait to see PWM output effect
+        wait for 5 ms;  -- Wait to see PWM output effect
 
         -- Apply reset
         reset <= '1';
@@ -117,7 +117,7 @@ begin
         btnU <= '1';
         wait for 11 ms;
         btnU <= '0';
-        wait for 5ms;  -- Wait to see PWM output effect
+        wait for 5 ms;  -- Wait to see PWM output effect
 
         -- Apply reset
         reset <= '1';
@@ -129,7 +129,7 @@ begin
         btnD <= '1';
         wait for 11 ms;
         btnD <= '0';
-        wait for 5ms;  -- Wait to see PWM output effect
+        wait for 5 ms;  -- Wait to see PWM output effect
         
         -- End simulation
         wait;
