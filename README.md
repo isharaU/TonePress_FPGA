@@ -44,13 +44,13 @@ Once you verify the design via simulation, you can program the Basys3 board:
 
 Below is the waveform from the simulation of the **top module** (`sound_generator_top_tb`), showing the button presses and the corresponding PWM output to the speaker.
 
-![Top Module Simulation Graph](" \TonePress_FPGA\Grraphs\sim.png")
+![Top Module Simulation Graph](https://github.com/isharaU/TonePress_FPGA/blob/add-readme/Grraphs/sim.png)
 
 ### Top Module Entity Diagram
 
 The following diagram illustrates the entity of the **top module**, showing how the components are interconnected:
 
-![Top Module Entity Diagram](path_to_entity_diagram.png)
+![Top Module Entity Diagram](https://github.com/isharaU/TonePress_FPGA/blob/add-readme/Grraphs/design.png)
 
 ## License
 
@@ -58,5 +58,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any inquiries or issues, feel free to contact me at [isharauditha5@gmail.com].
+If you have any inquiries or issues, feel free to contact me via [E-mail](mailto:isharauditha5@gmail.com).
 
