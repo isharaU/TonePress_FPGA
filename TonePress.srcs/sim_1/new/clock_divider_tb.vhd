@@ -79,19 +79,16 @@ begin
         
         -- Test case 1: Tone frequency 10 (divide clock by 10 cycles)
         tone_freq <= to_unsigned(10, 32);
-        wait for 100 ns;  -- Observe output for some time
+        wait for 100 ns;  -- Observe output for some time       
 
         -- Test case 2: Tone frequency 20 (divide clock by 20 cycles)
         tone_freq <= to_unsigned(20, 32);
         wait for 100 ns;
-
+       
         -- Test case 3: Tone frequency 40 (divide clock by 40 cycles)
         tone_freq <= to_unsigned(40, 32);
         wait for 100 ns;
-
-        -- End simulation within 1000 ns
-        wait for 200 ns;  -- Simulation stops after 500 ns total
-
+       
         wait;
     end process;
 
