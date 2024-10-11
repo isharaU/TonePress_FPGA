@@ -18,44 +18,42 @@
 -- 
 ----------------------------------------------------------------------------------
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
-ENTITY sound_generator_top_tb IS
-END sound_generator_top_tb;
+entity sound_generator_top_tb is
+end sound_generator_top_tb;
 
-ARCHITECTURE behavior OF sound_generator_top_tb IS 
-
-    -- Component Declaration for the Unit Under Test (UUT)
-    COMPONENT sound_generator_top
-    PORT(
-        clk     : IN std_logic;
-        reset   : IN std_logic;
-        btnL    : IN std_logic;
-        btnR    : IN std_logic;
-        btnU    : IN std_logic;
-        btnD    : IN std_logic;
-        speaker : OUT std_logic
-    );
-    END COMPONENT;
+architecture Behavioral of sound_generator_top_tb is
+    -- Component declaration
+    component sound_generator_top is
+        Port (
+            clk       : in std_logic;
+            reset     : in std_logic;
+            btnL      : in std_logic;
+            btnR      : in std_logic;
+            btnU      : in std_logic;
+            btnD      : in std_logic;
+            speaker   : out std_logic
+        );
+    end component;
     
-    -- Testbench signals
-    SIGNAL clk     : std_logic := '0';
-    SIGNAL reset   : std_logic := '0';
-    SIGNAL btnL    : std_logic := '0';
-    SIGNAL btnR    : std_logic := '0';
-    SIGNAL btnU    : std_logic := '0';
-    SIGNAL btnD    : std_logic := '0';
-    SIGNAL speaker : std_logic;
+    -- Signals for connecting to the DUT
+    signal clk      : std_logic := '0';
+    signal reset    : std_logic := '0';
+    signal btnL     : std_logic := '0';
+    signal btnR     : std_logic := '0';
+    signal btnU     : std_logic := '0';
+    signal btnD     : std_logic := '0';
+    signal speaker  : std_logic;
     
     -- Clock period definition
-    CONSTANT PERIOD : time := 10 ns;  -- 100 MHz clock
+    constant clk_period : time := 10 ns;  -- 100 MHz clock
     
-BEGIN
-
-    -- Instantiate the Unit Under Test (UUT)
-    uut: sound_generator_top PORT MAP (
+begin
+    -- Instantiate the Device Under Test (DUT)
+    DUT: sound_generator_top port map (
         clk     => clk,
         reset   => reset,
         btnL    => btnL,
@@ -64,73 +62,66 @@ BEGIN
         btnD    => btnD,
         speaker => speaker
     );
-
-    -- Clock generation process
-    clk_process :process
+    
+    -- Clock process
+    clk_process: process
     begin
         clk <= '0';
-        wait for PERIOD / 2;
+        wait for clk_period/2;
         clk <= '1';
-        wait for PERIOD / 2;
+        wait for clk_period/2;
     end process;
-
+    
     -- Stimulus process
-    stimulus : process
-    begin	
-        -- Initial reset
-        reset <= '1';   -- Assert reset
-        wait for 100 ns;
-        reset <= '0';   -- Deassert reset
-        wait for 50 ns;
-        
-        -- Test button Left (btnL)
-        report "Testing btnL (Left button)" severity note;
-        btnL <= '1';
-        wait for 100 ns;
+    stim_proc: process
+    begin
+        -- Initialize inputs
+        reset <= '1';
         btnL <= '0';
-        wait for 100 ns;
-        
-        -- Test button Right (btnR)
-        report "Testing btnR (Right button)" severity note;
-        btnR <= '1';
-        wait for 100 ns;
         btnR <= '0';
-        wait for 100 ns;
-        
-        -- Test button Up (btnU)
-        report "Testing btnU (Up button)" severity note;
-        btnU <= '1';
-        wait for 100 ns;
         btnU <= '0';
-        wait for 100 ns;
-        
-        -- Test button Down (btnD)
-        report "Testing btnD (Down button)" severity note;
-        btnD <= '1';
-        wait for 100 ns;
         btnD <= '0';
         wait for 100 ns;
-
-        -- Test multiple buttons simultaneously
-        report "Testing btnL and btnR simultaneously" severity note;
+        
+        -- Release reset
+        reset <= '0';
+        wait for 100 ns;
+        
+        -- Test button presses
+        -- Left button
         btnL <= '1';
-        btnR <= '1';
-        wait for 100 ns;
+        wait for 1 ms;
         btnL <= '0';
+        wait for 10 ms;
+        
+        -- Right button
+        btnR <= '1';
+        wait for 1 ms;
         btnR <= '0';
-        wait for 200 ns;
-
-        -- Test for potential button bouncing scenario
-        report "Testing btnU with bounce" severity note;
+        wait for 10 ms;
+        
+        -- Up button
         btnU <= '1';
-        wait for 10 ns;
+        wait for 1 ms;
         btnU <= '0';
-        wait for 10 ns;
+        wait for 10 ms;
+        
+        -- Down button
+        btnD <= '1';
+        wait for 1 ms;
+        btnD <= '0';
+        wait for 10 ms;
+        
+        -- Test multiple button presses
+        btnL <= '1';
         btnU <= '1';
-        wait for 50 ns;
+        wait for 1 ms;
+        btnL <= '0';
         btnU <= '0';
-        wait for 100 ns;
-
+        wait for 10 ms;
+        
+        -- End simulation
+        wait;
     end process;
 
-END;
+end Behavioral;
