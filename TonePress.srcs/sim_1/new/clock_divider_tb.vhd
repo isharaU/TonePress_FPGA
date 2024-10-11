@@ -74,22 +74,24 @@ begin
     begin
         -- Apply reset for the first few cycles
         reset <= '1';
-        wait for 100 ns;
+        wait for 20 ns;  -- Shorter reset duration
         reset <= '0';
         
-        -- Test case 1: Tone frequency 1000 (divide clock by 1000 cycles)
-        tone_freq <= to_unsigned(1000, 32);
+        -- Test case 1: Tone frequency 10 (divide clock by 10 cycles)
+        tone_freq <= to_unsigned(10, 32);
         wait for 100 ns;  -- Observe output for some time
 
-        -- Test case 2: Tone frequency 2000 (divide clock by 2000 cycles)
-        tone_freq <= to_unsigned(2000, 32);
+        -- Test case 2: Tone frequency 20 (divide clock by 20 cycles)
+        tone_freq <= to_unsigned(20, 32);
         wait for 100 ns;
 
-        -- Test case 3: Tone frequency 4000 (divide clock by 4000 cycles)
-        tone_freq <= to_unsigned(4000, 32);
+        -- Test case 3: Tone frequency 40 (divide clock by 40 cycles)
+        tone_freq <= to_unsigned(40, 32);
         wait for 100 ns;
 
-        -- End simulation
+        -- End simulation within 1000 ns
+        wait for 200 ns;  -- Simulation stops after 500 ns total
+
         wait;
     end process;
 
