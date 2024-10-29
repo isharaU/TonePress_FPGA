@@ -39,6 +39,7 @@ architecture Behavioral of button_handler is
     constant FREQ_B4 : unsigned(31 downto 0) := to_unsigned(202478, 32);  -- 493.88 Hz (B4)
     constant FREQ_C5 : unsigned(31 downto 0) := to_unsigned(191113, 32);  -- 523.25 Hz (C5)
     constant FREQ_D5 : unsigned(31 downto 0) := to_unsigned(170648, 32);  -- 587.33 Hz (D5)
+    constant FREQ_80 : unsigned(31 downto 0) := to_unsigned(625000, 32);  -- 80 Hz
 
 begin
     -- Process to handle the button presses and assign corresponding frequencies
@@ -53,7 +54,7 @@ begin
         elsif btnD = '1' then
             tone_freq <= FREQ_D5;  -- Button Down: Set frequency for D5 (587.33 Hz)
         else
-            tone_freq <= FREQ_A4;  -- Default: A4 (440 Hz) if no button is pressed
+            tone_freq <= FREQ_80;  -- Default: A4 (440 Hz) if no button is pressed
         end if;
     end process;
 
