@@ -54,7 +54,7 @@ begin
         elsif btnD = '1' then
             tone_freq <= FREQ_D5;  -- Button Down: Set frequency for D5 (587.33 Hz)
         else
-            tone_freq <= FREQ_80;  -- Default: A4 (440 Hz) if no button is pressed
+            tone_freq <= FREQ_80;  -- Default: A4 (80 Hz) if no button is pressed
         end if;
     end process;
 
