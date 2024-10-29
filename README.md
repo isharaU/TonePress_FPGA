@@ -6,13 +6,27 @@ This project implements a **sound generator** using an FPGA (Basys3) board. The 
 
 The **top module** (`sound_generator_top.vhd`) integrates all these components, driving a speaker with a PWM signal based on the user button inputs.
 
+### Introduction
+
+The TonePress FPGA project aims to create an interactive sound generator that produces different tones based on user input through buttons on an FPGA board. By pressing the buttons, users can experience a variety of sounds, making it a fun and educational tool for exploring digital signal generation and hardware design.
+
+
 ## Components
 
-1. **Debounce Module**: Debounces the button inputs to ensure stable transitions.
-2. **Button Handler Module**: Assigns a tone frequency to each button (Left, Right, Up, Down).
-3. **Clock Divider Module**: Divides the main clock based on the tone frequency to generate a lower frequency clock for the PWM signal.
-4. **PWM Generator Module**: Produces a PWM signal for the speaker based on the divided clock signal.
-5. **Top Module**: Integrates all components and connects the debounced button inputs to the frequency generator, clock divider, and PWM generator.
+1. **Debounce Module**: 
+   - This module ensures that the button inputs are stable and free from noise, preventing multiple triggers from a single press.
+
+2. **Button Handler Module**: 
+   - This module maps each button press to a specific frequency, allowing for distinct sound outputs for each button.
+
+3. **Clock Divider Module**: 
+   - This component divides the main clock signal to generate a lower frequency clock for the PWM signal, enabling precise sound modulation.
+
+4. **PWM Generator Module**: 
+   - Produces a Pulse Width Modulated (PWM) signal for the speaker based on the divided clock signal, effectively controlling the sound output.
+
+5. **Top Module**: 
+   - Integrates all components and connects the debounced button inputs to the frequency generator, clock divider, and PWM generator, serving as the main control unit for the sound generation.
 
 
 ## How to Run the Project
